@@ -3,10 +3,12 @@ import { Screen } from './types.js';
 import { EntryScreen } from './screens/entry.js';
 import { CreateRoomScreen } from "./screens/create-room.js";
 import { WaitingAreaScreen } from './screens/waiting-area.js';
+import { Text } from 'ink';
+import { GameRoomScreen } from './screens/game-room.js';
 
 
 export default function App() {
-	const [screen, setScreen] = useState<Screen>("waiting_area")
+	const [screen, setScreen] = useState<Screen>("running_game")
 
 	function handleRoomJoin(name: string, room_code: string) {
 		console.log('name', name);
@@ -25,18 +27,15 @@ export default function App() {
 		setScreen("waiting_area")
 	}	
 
-	// TODO:
-		// 2. adding rest of the screens
-
 	if (screen === "auth") {
 		return <EntryScreen handleRoomJoin={handleRoomJoin} setScreen={setScreen} />
 	} else if (screen === "create_room") {
 		return <CreateRoomScreen handleRoomCreation={handleRoomCreation} setScreen={setScreen} />
-	} 
-		else if (screen === "waiting_area") {
-		return <WaitingAreaScreen setScreen={setScreen} />
-	} 
-	// else if (screen === "running_game") {
-	// 	return <EntryScreen handleSubmit={handleSubmit} setScreen={setScreen} />
-	// }
+	} else if (screen === "waiting_area") {
+		return <WaitingAreaScreen />
+	} else if (screen === "running_game") {
+		return <GameRoomScreen />
+	}
+
+	return <Text>Invalid Screen Type</Text>
 }

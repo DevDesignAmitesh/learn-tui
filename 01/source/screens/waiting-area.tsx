@@ -1,18 +1,8 @@
-import React, { useState } from 'react';
-import { Box, Text, useInput } from 'ink';
-import TextInput from 'ink-text-input';
-import { Screen, CreateRoomScreenInput } from '../types.js';
+import React from 'react';
+import { Box, Text } from 'ink';
 import { Button } from '../components/button.js';
 
-export function WaitingAreaScreen({
-  handleRoomCreation,
-  handleCancelRoom,
-  handleLeaveRoom,
-}: {
-  handleRoomCreation: (name: string, room_name: string) => void; 
-  handleCancelRoom: (input: Screen) => void;
-  handleLeaveRoom: (input: Screen) => void;
-}) {
+export function WaitingAreaScreen() {
 
   const name = "Amitesh";
   
@@ -36,29 +26,24 @@ export function WaitingAreaScreen({
 			</Text>
 
 
-			<Box
-				width={'20%'}
-        // height={4}
-        // paddingY={1}
-        display='flex'
-        alignItems='center'
-        // justifyContent='center'
-        gap={1}
-        borderStyle={'single'}
-				borderColor={'cyan'}
-			>
+			{Array.from({length: 5}).map((_, idx) => (
         <Box
-          // width={2}
-          // height={2}
-          paddingX={2}
+          key={idx}
+          width={'20%'}
+          // height={4}
+          paddingX={1}
+          display='flex'
+          alignItems='center'
+          // justifyContent='center'
+          gap={1}
           borderStyle={'single'}
           borderColor={'cyan'}
-			  > 
-          <Text>{name[0]}</Text>
-        </Box>
+			  >
+          <Text>{idx + 1}.</Text>
 
-        <Text>{name}</Text>
+          <Text>{name}</Text>
       </Box>
+      ))}
 
       <Button label='start room' action={() => {}} />
 
